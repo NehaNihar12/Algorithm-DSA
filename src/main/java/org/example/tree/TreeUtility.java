@@ -1,5 +1,8 @@
 package org.example.tree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class TreeUtility<T extends Comparable<T>> {
 
 //    function to create a tree by inserting node one by one
@@ -48,7 +51,7 @@ public class TreeUtility<T extends Comparable<T>> {
         }
     }
 
-//    BFS Traversal. level-order traversal
+//    BFS Traversal using recursion. level-order traversal
     public void leveOrderTraversal(Node<T> root){
         int h= height(root);
         for(int i=1;i<=h;i++){
@@ -64,6 +67,25 @@ public class TreeUtility<T extends Comparable<T>> {
         }else{
             printNodesAtLevel(root.left, level,currentLevel+1);
             printNodesAtLevel(root.right, level,currentLevel+1);
+        }
+    }
+
+//    BFS Traversal using queue
+    public void leveOrderTraversalWithQueue(Node<T> root){
+        Queue<Node<T>> queue = new LinkedList<Node<T>>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            Node<T> temp = queue.peek();
+            queue.remove();
+            System.out.print(temp.data+" ");
+//            enqueue left child
+            if(temp.left!=null){
+                queue.add(temp.left);
+            }
+//            enqueue right child
+            if(temp.right!=null){
+                queue.add(temp.right);
+            }
         }
     }
 
